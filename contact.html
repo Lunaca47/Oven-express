@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Oven Express - Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: "#F39C12",
+                            cream: "#FDF5E6",
+                            brown: "#4A2C2A",
+                        },
+                    },
+                    boxShadow: {
+                        soft: "0 10px 25px rgba(0,0,0,0.08)",
+                        card: "0 18px 45px rgba(0,0,0,0.12)",
+                    },
+                    borderRadius: {
+                        "2xl": "1.25rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white">
+    <div id="preloader"><div class="loader"></div></div>
+    <div class="min-h-screen flex flex-col bg-gradient-to-b from-brand-cream/80 to-white">
+        <!-- NAVBAR -->
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-100">
+            <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-orange/10 text-brand-orange text-xl shadow-soft group-hover:scale-105 transition">🍕</span>
+                    <div class="flex flex-col leading-tight">
+                        <span class="font-semibold text-brand-brown tracking-tight text-lg">Oven Express</span>
+                        <span class="text-xs text-slate-500">Hot, Fresh &amp; Fast</span>
+                    </div>
+                </a>
+                <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+                    <li><a href="index.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Home</a></li>
+                    <li><a href="menu.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Menu</a></li>
+                    <li><a href="about.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">About</a></li>
+                    <li><a href="gallery.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link-contact py-1 border-b-2 border-brand-orange text-brand-orange transition">Contact</a></li>
+                </ul>
+                <div class="flex items-center gap-3">
+                    <a href="order.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-orange text-white text-sm font-semibold px-4 py-2 rounded-full shadow-soft hover:shadow-card hover:-translate-y-[1px] transition">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                    <button id="mobileToggle" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-orange-100 text-brand-brown hover:bg-brand-cream transition">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2005/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <span class="sr-only">Toggle navigation</span>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 bg-white/95 border-t border-orange-100">
+                <div class="max-w-6xl mx-auto px-4 pb-3 flex flex-col gap-1 text-sm font-medium text-slate-700">
+                    <a href="index.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Home</a>
+                    <a href="menu.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Menu</a>
+                    <a href="about.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">About</a>
+                    <a href="gallery.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Gallery</a>
+                    <a href="contact.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream text-brand-orange">Contact</a>
+                    <a href="order.html" class="w-full flex items-center justify-center gap-2 text-left px-2 py-2 rounded-md bg-brand-orange text-white mt-1">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT (Contact Page Content) -->
+        <main class="flex-1">
+            <section class="py-10 sm:py-12">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 reveal">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-brand-brown mb-2"> Contact &amp; Stall Info </h2>
+                        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+                            Have feedback, collaboration ideas, or event catering requests?
+                            Reach out and the team will respond during working hours.
+                        </p>
+                    </div>
+                    <div class="grid lg:grid-cols-2 gap-8 items-start">
+                        <!-- Info -->
+                        <div class="space-y-5 reveal">
+                            <div class="rounded-2xl bg-white shadow-soft p-5">
+                                <h3 class="text-base font-semibold text-brand-brown mb-3">Stall Location</h3>
+                                <p class="text-sm text-slate-600">
+                                    Oven Express, Food Court Block<br />
+                                    Lovely Professional University, Phagwara, Punjab
+                                </p>
+                                <p class="text-sm text-slate-600 mt-3">
+                                    <span class="font-semibold text-brand-brown">Timings:</span> 11:00 AM – 11:00 PM (all teaching days)
+                                </p>
+                            </div>
+                            <div class="rounded-2xl bg-white shadow-soft p-5 space-y-3 text-sm text-slate-600">
+                                <div class="flex items-start gap-3">
+                                    <span class="h-8 w-8 rounded-full bg-orange-100 text-brand-orange flex items-center justify-center text-lg">📞</span>
+                                    <div>
+                                        <p class="font-semibold text-brand-brown">Order &amp; queries</p>
+                                        <p>+91‑98765‑00000</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="h-8 w-8 rounded-full bg-orange-100 text-brand-orange flex items-center justify-center text-lg">📧</span>
+                                    <div>
+                                        <p class="font-semibold text-brand-brown">Email</p>
+                                        <p>hello@ovenexpress.campus</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="h-8 w-8 rounded-full bg-orange-100 text-brand-orange flex items-center justify-center text-lg">💬</span>
+                                    <div>
+                                        <p class="font-semibold text-brand-brown">WhatsApp updates</p>
+                                        <p>Join the Campus Updates Group</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contact Form -->
+                        <form id="contactForm" class="reveal rounded-2xl bg-white shadow-soft p-5">
+                            <h3 class="text-base font-semibold text-brand-brown mb-4">Send a quick message</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label for="contactName" class="sr-only">Your Name</label>
+                                    <input type="text" id="contactName" placeholder="Your Name" class="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange" />
+                                    <p data-error-for="contactName" class="text-xs text-red-500 pt-1 hidden"></p>
+                                </div>
+                                <div>
+                                    <label for="contactEmail" class="sr-only">Your Email</label>
+                                    <input type="email" id="contactEmail" placeholder="Your Campus Email" class="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange" />
+                                    <p data-error-for="contactEmail" class="text-xs text-red-500 pt-1 hidden"></p>
+                                </div>
+                                <div>
+                                    <label for="contactMessage" class="sr-only">Message</label>
+                                    <textarea id="contactMessage" rows="4" placeholder="Your Message or Request..." class="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange resize-none"></textarea>
+                                    <p data-error-for="contactMessage" class="text-xs text-red-500 pt-1 hidden"></p>
+                                </div>
+                            </div>
+                            <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-brand-orange text-white text-sm font-semibold shadow-soft hover:shadow-card hover:-translate-y-[1px] transition mt-4"> Send Message </button>
+                            <p id="contactSuccess" class="text-[11px] text-emerald-600 mt-2 hidden"> Message sent successfully. The team will get back shortly. </p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="border-t border-orange-100 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                <p>© 2025 Oven Express. Built for campus life.</p>
+                <p class="flex items-center gap-1">
+                    <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
+                    <span>Hot, fresh, and always on‑time.</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Oven Express - Your Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: "#F39C12",
+                            cream: "#FDF5E6",
+                            brown: "#4A2C2A",
+                        },
+                    },
+                    boxShadow: {
+                        soft: "0 10px 25px rgba(0,0,0,0.08)",
+                        card: "0 18px 45px rgba(0,0,0,0.12)",
+                    },
+                    borderRadius: {
+                        "2xl": "1.25rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-white">
+    <div id="preloader"><div class="loader"></div></div>
+
+    <div class="min-h-screen flex flex-col bg-gradient-to-b from-brand-cream/80 to-white">
+
+        <!-- HEADER -->
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-100">
+            <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-orange/10 text-brand-orange text-xl shadow-soft group-hover:scale-105 transition">🍕</span>
+                    <div class="flex flex-col leading-tight">
+                        <span class="font-semibold text-brand-brown tracking-tight text-lg">Oven Express</span>
+                        <span class="text-xs text-slate-500">Hot, Fresh &amp; Fast</span>
+                    </div>
+                </a>
+
+                <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+                    <li><a href="index.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Home</a></li>
+                    <li><a href="menu.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Menu</a></li>
+                    <li><a href="about.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">About</a></li>
+                    <li><a href="gallery.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Contact</a></li>
+                </ul>
+
+                <div class="flex items-center gap-3">
+                    <a href="order.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-orange text-white text-sm font-semibold px-4 py-2 rounded-full shadow-soft hover:shadow-card transition">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+
+                    <button id="mobileToggle" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-orange-100 text-brand-brown hover:bg-brand-cream transition">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- MOBILE MENU -->
+            <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 bg-white/95 border-t border-orange-100">
+                <div class="max-w-6xl mx-auto px-4 pb-3 flex flex-col gap-1 text-sm font-medium text-slate-700">
+                    <a href="index.html" class="px-2 py-2 rounded-md hover:bg-brand-cream">Home</a>
+                    <a href="menu.html" class="px-2 py-2 rounded-md hover:bg-brand-cream">Menu</a>
+                    <a href="about.html" class="px-2 py-2 rounded-md hover:bg-brand-cream">About</a>
+                    <a href="gallery.html" class="px-2 py-2 rounded-md hover:bg-brand-cream">Gallery</a>
+                    <a href="contact.html" class="px-2 py-2 rounded-md hover:bg-brand-cream">Contact</a>
+
+                    <a href="order.html" class="w-full flex items-center justify-center gap-2 mt-2 px-4 py-2 rounded-full bg-brand-orange text-white text-sm font-semibold shadow-soft">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1">
+            <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+
+                <!-- CART VIEW -->
+                <div id="cartView">
+                    <div class="text-center mb-10 reveal">
+                        <h1 class="text-4xl font-bold text-brand-brown tracking-tight">Your Order Cart</h1>
+                        <p class="text-slate-600 max-w-xl mx-auto mt-2">Review your items before proceeding to checkout.</p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-6">
+
+                        <!-- CART ITEMS -->
+                        <div class="lg:col-span-2">
+                            <div class="flex items-center justify-between mb-3 reveal">
+                                <h2 class="font-semibold text-brand-brown text-lg">Selected Items</h2>
+                                <a href="menu.html" class="text-xs font-semibold text-brand-orange hover:underline">+ Add more items</a>
+                            </div>
+
+                            <div class="reveal rounded-2xl bg-white shadow-soft p-4 sm:p-5 min-h-[180px]">
+                                <div id="emptyCart" class="text-center text-sm text-slate-500 py-10">
+                                    <p class="text-3xl mb-2">🛒</p>
+                                    <p class="font-medium text-brand-brown">Your cart is empty.</p>
+                                    <p class="text-xs text-slate-500 mt-1">Browse our delicious pizza, burgers and snack options.</p>
+                                    <a href="menu.html" class="inline-block mt-4 px-5 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold shadow-soft hover:bg-brand-brown transition">Explore Menu</a>
+                                </div>
+
+                                <div id="cartItems" class="space-y-3 hidden"></div>
+                            </div>
+                        </div>
+
+                        <!-- SUMMARY PANEL -->
+                        <aside class="lg:col-span-1">
+                            <h2 class="font-semibold text-brand-brown mb-3 text-lg reveal">Order Summary</h2>
+
+                            <div class="reveal rounded-2xl bg-white shadow-soft p-4 sm:p-5 space-y-3 border border-orange-100">
+                                <div class="flex items-center justify-between text-sm text-slate-700">
+                                    <span>Subtotal</span>
+                                    <span id="subtotalAmount" class="font-semibold text-brand-brown">₹ 0.00</span>
+                                </div>
+
+                                <div class="flex items-center justify-between text-sm text-slate-700">
+                                    <span>Tax (5% GST)</span>
+                                    <span id="taxAmount">₹ 0.00</span>
+                                </div>
+
+                                <div class="flex items-center justify-between text-xs text-emerald-600">
+                                    <span>Campus Delivery</span>
+                                    <span class="font-bold">FREE</span>
+                                </div>
+
+                                <div class="border-t border-orange-100 pt-3 flex items-center justify-between text-base">
+                                    <span class="font-bold text-brand-brown">Total Payable</span>
+                                    <span id="totalAmount" class="font-extrabold text-brand-orange text-lg">₹ 0.00</span>
+                                </div>
+
+                                <button id="checkoutBtn" class="w-full inline-flex items-center justify-center px-4 py-3 rounded-full bg-brand-orange text-white text-sm font-semibold shadow-soft hover:shadow-card hover:-translate-y-0.5 transition mt-4 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Proceed to Checkout
+                                </button>
+                            </div>
+
+                            <div class="mt-4 p-3 rounded-xl bg-orange-50/70 border border-orange-100 text-xs text-slate-600 flex items-center gap-2">
+                                <span>⚡</span>
+                                <span>Delivery to all hostel gates &amp; academic blocks in 20-25 mins.</span>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- TRACKING VIEW (Hidden initially) -->
+                <div id="orderTrackingView" class="hidden text-center reveal pt-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-semibold mb-3">
+                        <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Order Placed Successfully
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl font-bold text-brand-brown tracking-tight mb-2">Tracking Your Order</h1>
+
+                    <p class="text-slate-600 text-sm max-w-xl mx-auto mb-8">
+                        Order <span id="orderIdDisplay" class="font-bold text-brand-orange">#OE-1001</span> is currently in progress!
+                    </p>
+
+                    <div class="max-w-2xl mx-auto rounded-2xl bg-white shadow-soft p-6 sm:p-10 border border-orange-100 text-left">
+
+                        <!-- Delivery destination badge -->
+                        <div class="mb-8 p-4 rounded-xl bg-orange-50/70 border border-orange-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                            <div>
+                                <p class="text-slate-500">Delivering to:</p>
+                                <p class="font-bold text-brand-brown text-sm" id="trackingCustomerName">Student</p>
+                                <p class="text-slate-600" id="trackingAddress">Hostel Block</p>
+                            </div>
+                            <div class="text-right sm:text-right">
+                                <p class="text-slate-500">Estimated Delivery Time:</p>
+                                <p id="deliveryTime" class="font-bold text-brand-orange text-sm">20-25 minutes</p>
+                            </div>
+                        </div>
+
+                        <!-- PROGRESS BAR -->
+                        <div class="flex justify-between items-center relative mb-10 px-2">
+                            <div class="absolute inset-x-4 top-5 h-1 bg-orange-100 -translate-y-1/2"></div>
+                            <div id="progressBar" class="absolute left-4 top-5 h-1 bg-brand-orange -translate-y-1/2 w-0 transition-all duration-700"></div>
+
+                            <div class="tracking-step active" data-step="1">
+                                <div class="step-icon h-10 w-10 rounded-full bg-brand-orange text-white flex items-center justify-center text-sm font-bold shadow-soft">1</div>
+                                <p class="text-[11px] text-brand-brown font-semibold mt-2 text-center">Confirmed</p>
+                            </div>
+
+                            <div class="tracking-step" data-step="2">
+                                <div class="step-icon h-10 w-10 rounded-full bg-orange-100 text-brand-brown flex items-center justify-center text-sm font-bold">2</div>
+                                <p class="text-[11px] text-slate-600 font-semibold mt-2 text-center">In Oven</p>
+                            </div>
+
+                            <div class="tracking-step" data-step="3">
+                                <div class="step-icon h-10 w-10 rounded-full bg-orange-100 text-brand-brown flex items-center justify-center text-sm font-bold">3</div>
+                                <p class="text-[11px] text-slate-600 font-semibold mt-2 text-center">On the Way</p>
+                            </div>
+
+                            <div class="tracking-step" data-step="4">
+                                <div class="step-icon h-10 w-10 rounded-full bg-orange-100 text-brand-brown flex items-center justify-center text-sm font-bold">4</div>
+                                <p class="text-[11px] text-slate-600 font-semibold mt-2 text-center">Delivered</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 text-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <p id="liveStatusMessage" class="text-sm sm:text-base font-semibold text-brand-brown">Your order has been confirmed &amp; queued in kitchen.</p>
+                            <p class="text-xs text-slate-500 mt-1">Keep your phone ready for rider call upon arrival.</p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3 mt-6">
+                            <button id="newOrderBtn" class="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-brand-orange text-white text-sm font-semibold shadow-soft hover:shadow-card transition">
+                                Order Something Else
+                            </button>
+                            <a href="index.html" class="inline-flex items-center justify-center px-4 py-2.5 rounded-full border border-orange-200 text-brand-brown text-sm font-semibold hover:bg-orange-50 transition">
+                                Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-orange-100 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                <p>© 2025 Oven Express. Built for campus life.</p>
+                <p class="flex items-center gap-1">
+                    <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
+                    Hot, fresh, and always on-time.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CHECKOUT DETAILS MODAL -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-card bg-white rounded-2xl shadow-card w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
+            <h3 class="text-xl font-bold text-brand-brown mb-1">Campus Delivery Details</h3>
+            <p class="text-xs text-slate-500 mb-4">Where should our runner deliver your order?</p>
+
+            <form id="checkoutForm" class="space-y-4">
+                <div>
+                    <label for="custName" class="block text-xs font-semibold text-brand-brown mb-1">Your Full Name *</label>
+                    <input type="text" id="custName" required placeholder="e.g. Aman Sharma" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange" />
+                </div>
+
+                <div>
+                    <label for="custPhone" class="block text-xs font-semibold text-brand-brown mb-1">Campus Phone Number *</label>
+                    <input type="tel" id="custPhone" required placeholder="e.g. 9876543210" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="custBlock" class="block text-xs font-semibold text-brand-brown mb-1">Hostel / Location *</label>
+                        <select id="custBlock" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange bg-white">
+                            <option value="Boys Hostel 1">Boys Hostel 1</option>
+                            <option value="Boys Hostel 2">Boys Hostel 2</option>
+                            <option value="Boys Hostel 3">Boys Hostel 3</option>
+                            <option value="Boys Hostel 4">Boys Hostel 4</option>
+                            <option value="Girls Hostel 1">Girls Hostel 1</option>
+                            <option value="Girls Hostel 2">Girls Hostel 2</option>
+                            <option value="Girls Hostel 3">Girls Hostel 3</option>
+                            <option value="Central Library">Central Library</option>
+                            <option value="Academic Block 34">Academic Block 34</option>
+                            <option value="Counter Pickup">Direct Counter Pickup</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="custRoom" class="block text-xs font-semibold text-brand-brown mb-1">Room / Desk No.</label>
+                        <input type="text" id="custRoom" placeholder="e.g. Room 402" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:border-brand-orange" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-brand-brown mb-2">Payment Method</label>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <label class="flex flex-col items-center justify-center p-2.5 border border-slate-200 rounded-xl cursor-pointer hover:bg-orange-50 has-checked:border-brand-orange has-checked:bg-orange-50/60">
+                            <input type="radio" name="paymentMethod" value="UPI / QR Code" checked class="mb-1 text-brand-orange focus:ring-brand-orange" />
+                            <span class="font-medium">UPI / QR</span>
+                        </label>
+                        <label class="flex flex-col items-center justify-center p-2.5 border border-slate-200 rounded-xl cursor-pointer hover:bg-orange-50 has-checked:border-brand-orange has-checked:bg-orange-50/60">
+                            <input type="radio" name="paymentMethod" value="Cash on Delivery" class="mb-1 text-brand-orange focus:ring-brand-orange" />
+                            <span class="font-medium">Cash (COD)</span>
+                        </label>
+                        <label class="flex flex-col items-center justify-center p-2.5 border border-slate-200 rounded-xl cursor-pointer hover:bg-orange-50 has-checked:border-brand-orange has-checked:bg-orange-50/60">
+                            <input type="radio" name="paymentMethod" value="Campus SmartCard" class="mb-1 text-brand-orange focus:ring-brand-orange" />
+                            <span class="font-medium">SmartCard</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button type="button" id="cancelCheckoutBtn" class="flex-1 py-2 rounded-full border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold shadow-soft hover:bg-brand-brown transition">
+                        Confirm &amp; Place Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FLOATING RECEIPT MODAL (FIXED + CENTERED) -->
+    <div id="receiptModal" class="modal">
+        <div class="modal-card bg-white rounded-2xl shadow-card w-full max-w-sm p-6 sm:p-7 relative max-h-[90vh] overflow-y-auto">
+
+            <button id="receiptClose" class="no-print absolute top-3 right-4 text-2xl text-slate-400 hover:text-brand-brown">×</button>
+
+            <div class="text-center mb-4 pb-3 border-b border-orange-100">
+                <span class="text-2xl">🍕</span>
+                <h3 class="text-lg font-bold text-brand-brown">Oven Express</h3>
+                <p class="text-[11px] text-slate-500">Campus Food Court Stall</p>
+                <p id="receiptOrderId" class="text-xs font-semibold text-brand-orange mt-1">#OE-0000</p>
+            </div>
+
+            <div id="receiptCustomerInfo" class="mb-3"></div>
+
+            <div id="receiptItems" class="space-y-1 text-xs text-slate-700 my-3"></div>
+
+            <div class="border-t border-slate-200 mt-3 pt-2 space-y-1 text-xs">
+                <div class="flex items-center justify-between text-slate-600">
+                    <span>Subtotal</span>
+                    <span id="receiptSubtotal">₹ 0.00</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-600">
+                    <span>Tax (5%)</span>
+                    <span id="receiptTax">₹ 0.00</span>
+                </div>
+                <div class="border-t border-slate-200 pt-1 flex items-center justify-between text-sm font-bold text-brand-brown">
+                    <span>Total Paid</span>
+                    <span id="receiptTotal" class="text-brand-orange">₹ 0.00</span>
+                </div>
+            </div>
+
+            <div class="no-print mt-5 flex gap-2">
+                <button id="receiptPrintBtn" class="flex-1 py-2 rounded-full border border-orange-200 text-xs font-semibold text-brand-brown hover:bg-orange-50 transition">
+                    🖨️ Print
+                </button>
+                <button id="receiptTrackBtn" class="flex-1 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold shadow-soft hover:bg-brand-brown transition">
+                    Track Live →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

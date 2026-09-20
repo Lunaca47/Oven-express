@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Oven Express - Campus Food Stall</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: "#F39C12",
+                            cream: "#FDF5E6",
+                            brown: "#4A2C2A",
+                        },
+                    },
+                    boxShadow: {
+                        soft: "0 10px 25px rgba(0,0,0,0.08)",
+                        card: "0 18px 45px rgba(0,0,0,0.12)",
+                    },
+                    borderRadius: {
+                        "2xl": "1.25rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <!-- External Stylesheet Link -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- Shell -->
+    <div class="min-h-screen flex flex-col bg-gradient-to-b from-brand-cream/80 to-white">
+        <!-- NAVBAR -->
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-100">
+            <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-orange/10 text-brand-orange text-xl shadow-soft group-hover:scale-105 transition">🍕</span>
+                    <div class="flex flex-col leading-tight">
+                        <span class="font-semibold text-brand-brown tracking-tight text-lg">Oven Express</span>
+                        <span class="text-xs text-slate-500">Hot, Fresh &amp; Fast</span>
+                    </div>
+                </a>
+                <!-- Desktop links -->
+                <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+                    <li><a href="index.html" class="nav-link-home py-1 border-b-2 border-brand-orange text-brand-orange transition">Home</a></li>
+                    <li><a href="menu.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Menu</a></li>
+                    <li><a href="about.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">About</a></li>
+                    <li><a href="gallery.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Contact</a></li>
+                </ul>
+                <div class="flex items-center gap-3">
+                    <a href="order.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-orange text-white text-sm font-semibold px-4 py-2 rounded-full shadow-soft hover:shadow-card hover:-translate-y-[1px] transition">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                    <!-- Mobile menu button -->
+                    <button id="mobileToggle" class="md:hidden inline-flex items-center justify-center h-10 w-10
+                        rounded-full border border-orange-100 text-brand-brown hover:bg-brand-cream transition">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <span class="sr-only">Toggle navigation</span>
+                    </button>
+                </div>
+            </nav>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height]
+                duration-300 bg-white/95 border-t border-orange-100">
+                <div class="max-w-6xl mx-auto px-4 pb-3 flex flex-col gap-1 text-sm font-medium text-slate-700">
+                    <a href="index.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream text-brand-orange">Home</a>
+                    <a href="menu.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Menu</a>
+                    <a href="about.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">About</a>
+                    <a href="gallery.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Gallery</a>
+                    <a href="contact.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Contact</a>
+                    <a href="order.html" class="w-full flex items-center justify-center gap-2 text-left px-2 py-2 rounded-md bg-brand-orange text-white mt-1">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT (Home Page Content) -->
+        <main class="flex-1">
+            <section id="home" class="relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-
+                    gradient(circle_at_top,_rgba(243,156,18,0.16),_transparent_55%), radial-
+                    gradient(circle_at_bottom,_rgba(74,44,42,0.12),_transparent_55%)] pointer-events-none"></div>
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 relative">
+                    <div class="grid lg:grid-cols-2 gap-10 items-center">
+                        <div class="space-y-6 reveal">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-cream text-
+                                brand-brown text-xs font-semibold shadow-soft">
+                                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                Delivering across campus in under 25 minutes
+                            </span>
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-brown tracking-tight">
+                                Hot, Fresh &amp; Campus-Fast.
+                            </h1>
+                            <p class="text-slate-600 text-sm sm:text-base max-w-xl">
+                                Oven Express is your go-to campus food stall for pizzas, burgers, and late-night snacks,
+                                baked fresh right next to your lecture halls.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="order.html" class="inline-flex items-center justify-center px-5 py-2.5
+                                    rounded-full bg-brand-orange text-white text-sm font-semibold shadow-card hover:-translate-y-[2px]
+                                    hover:shadow-lg transition">
+                                    Order Now
+                                    <span class="ml-2 text-lg">→</span>
+                                </a>
+                                <a href="menu.html" class="inline-flex items-center justify-center px-4 py-2
+                                    rounded-full border border-orange-200 text-brand-brown text-sm font-semibold bg-white/80
+                                    hover:bg-brand-cream/70 hover:border-brand-orange transition">
+                                    View Menu
+                                </a>
+                            </div>
+                            <div class="flex flex-wrap gap-6 pt-3 text-xs sm:text-sm text-slate-600">
+                                <div class="flex items-center gap-2">
+                                    <span class="h-7 w-7 rounded-full bg-emerald-50 text-emerald-500 flex items-center
+                                        justify-center text-sm">✓</span>
+                                    <div>
+                                        <p class="font-semibold text-slate-800 text-xs">Campus-wide delivery</p>
+                                        <p>Hostel, labs &amp; academic blocks</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="h-7 w-7 rounded-full bg-orange-50 text-brand-orange flex items-center
+                                        justify-center text-sm">🔥</span>
+                                    <div>
+                                        <p class="font-semibold text-slate-800 text-xs">Freshly baked</p>
+                                        <p>Made to order, never stored</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative reveal">
+                            <div class="relative rounded-[1.75rem] overflow-hidden shadow-card bg-slate-900">
+                                <img
+                                    src="images/pizza1.jpg"
+                                    alt="Oven Express fresh pizza"
+                                    class="w-full h-80 sm:h-96 object-cover"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-brand-
+                                    orange/20"></div>
+                                <div class="absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-3 text-xs">
+                                    <div class="rounded-xl bg-white/95 px-3 py-2 shadow-soft flex items-center justify-
+                                        between">
+                                        <div>
+                                            <p class="font-semibold text-sm text-brand-brown">Tonight's bestsellers</p>
+                                            <p class="text-[11px] text-slate-500">The Mega Veggie Pizza, Burgers</p>
+                                        </div>
+                                        <span class="text-lg"> ★ 4.8</span>
+                                    </div>
+                                    <div class="rounded-xl bg-brand-orange text-white px-3 py-2 shadow-soft flex flex-col
+                                        justify-center">
+                                        <p class="text-[11px] uppercase tracking-wide opacity-80">Average delivery</p>
+                                        <p class="text-sm font-semibold">18 mins</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Why Choose Us -->
+            <section class="py-12 sm:py-14 bg-brand-cream/70">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 reveal">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-brand-brown mb-2">
+                            Why students love Oven Express
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
+                            Designed for campus life: fast service, fair pricing, and food that keeps you powered through
+                            lectures, labs, and late-night projects.
+                        </p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="reveal">
+                            <div class="h-full rounded-2xl bg-white shadow-soft p-5 flex flex-col gap-2 hover:-translate-
+                                y-1 hover:shadow-card transition">
+                                <div class="h-10 w-10 rounded-xl bg-orange-100 text-brand-orange flex items-center
+                                    justify-center text-xl mb-1">🛵</div>
+                                <h3 class="font-semibold text-brand-brown">Campus-wide delivery</h3>
+                                <p class="text-sm text-slate-600">
+                                    Delivering directly to hostels, labs, library lawns, and common rooms during active hours.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="reveal">
+                            <div class="h-full rounded-2xl bg-white shadow-soft p-5 flex flex-col gap-2 hover:-translate
+                                y-1 hover:shadow-card transition">
+                                <div class="h-10 w-10 rounded-xl bg-orange-100 text-brand-orange flex items-center
+                                    justify-center text-xl mb-1">🥦</div>
+                                <h3 class="font-semibold text-brand-brown">Fresh ingredients</h3>
+                                <p class="text-sm text-slate-600">
+                                    Sauces, veggies, and breads prepared in small batches to keep every bite fresh and
+                                    flavourful.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="reveal">
+                            <div class="h-full rounded-2xl bg-white shadow-soft p-5 flex flex-col gap-2 hover:-translate
+                                y-1 hover:shadow-card transition">
+                                <div class="h-10 w-10 rounded-xl bg-orange-100 text-brand-orange flex items-center
+                                    justify-center text-xl mb-1">⏱️</div>
+                                <h3 class="font-semibold text-brand-brown">Ready in minutes</h3>
+                                <p class="text-sm text-slate-600">
+                                    Optimized for quick service between classes and exam breaks so you never miss a slot.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-orange-100 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                <p>© 2025 Oven Express. Built for campus life.</p>
+                <p class="flex items-center gap-1">
+                    <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
+                    <span>Hot, fresh, and always on‑time.</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!-- External Script Link -->
+    <script src="script.js"></script>
+</body>
+</html>

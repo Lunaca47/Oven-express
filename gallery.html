@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Oven Express - Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: "#F39C12",
+                            cream: "#FDF5E6",
+                            brown: "#4A2C2A",
+                        },
+                    },
+                    boxShadow: {
+                        soft: "0 10px 25px rgba(0,0,0,0.08)",
+                        card: "0 18px 45px rgba(0,0,0,0.12)",
+                    },
+                    borderRadius: {
+                        "2xl": "1.25rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white">
+    <div id="preloader"><div class="loader"></div></div>
+    <div class="min-h-screen flex flex-col bg-gradient-to-b from-brand-cream/80 to-white">
+        <!-- NAVBAR -->
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-100">
+            <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-orange/10 text-brand-orange text-xl shadow-soft group-hover:scale-105 transition">🍕</span>
+                    <div class="flex flex-col leading-tight">
+                        <span class="font-semibold text-brand-brown tracking-tight text-lg">Oven Express</span>
+                        <span class="text-xs text-slate-500">Hot, Fresh &amp; Fast</span>
+                    </div>
+                </a>
+                <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+                    <li><a href="index.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Home</a></li>
+                    <li><a href="menu.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Menu</a></li>
+                    <li><a href="about.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">About</a></li>
+                    <li><a href="gallery.html" class="nav-link-gallery py-1 border-b-2 border-brand-orange text-brand-orange transition">Gallery</a></li>
+                    <li><a href="contact.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Contact</a></li>
+                </ul>
+                <div class="flex items-center gap-3">
+                    <a href="order.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-orange text-white text-sm font-semibold px-4 py-2 rounded-full shadow-soft hover:shadow-card hover:-translate-y-[1px] transition">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                    <button id="mobileToggle" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-orange-100 text-brand-brown hover:bg-brand-cream transition">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2005/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <span class="sr-only">Toggle navigation</span>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 bg-white/95 border-t border-orange-100">
+                <div class="max-w-6xl mx-auto px-4 pb-3 flex flex-col gap-1 text-sm font-medium text-slate-700">
+                    <a href="index.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Home</a>
+                    <a href="menu.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Menu</a>
+                    <a href="about.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">About</a>
+                    <a href="gallery.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream text-brand-orange">Gallery</a>
+                    <a href="contact.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Contact</a>
+                    <a href="order.html" class="w-full flex items-center justify-center gap-2 mt-1 px-4 py-2 rounded-full bg-brand-orange text-white text-sm font-semibold">
+                        <span>Order Online</span>
+                        <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT (Gallery Page Content) -->
+        <main class="flex-1">
+            <section class="py-10 sm:py-12">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 reveal">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-brand-brown mb-2"> Campus Stall Gallery </h2>
+                        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+                            Peek into our oven, our plates, and the everyday bites that make Oven Express your favorite campus food hub.
+                        </p>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- 6 gallery items with high quality local images -->
+                        <button class="gallery-item reveal group rounded-2xl overflow-hidden shadow-soft bg-white relative text-left">
+                            <img src="images/pizza1.jpg" alt="Cheese pull pizza" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur text-white font-medium"> 🍕 Late‑night pizza runs </span>
+                        </button>
+                        <button class="gallery-item reveal group rounded-2xl overflow-hidden shadow-soft bg-white relative text-left">
+                            <img src="images/burger1.webp" alt="Campus burger" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur text-white font-medium"> 🍔 Stacked campus burgers </span>
+                        </button>
+                        <button class="gallery-item reveal group rounded-2xl overflow-hidden shadow-soft bg-white relative text-left">
+                            <img src="images/bread.webp" alt="Garlic bread snack platter" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur text-white font-medium"> 🥖 Cheese garlic bread </span>
+                        </button>
+                        <button class="gallery-item reveal group rounded-2xl overflow-hidden shadow-soft bg-white relative text-left">
+                            <img src="images/fires.webp" alt="Hot masala fries in a box" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur text-white font-medium"> 🍟 Crispy campus fries </span>
+                        </button>
+                        <button class="gallery-item reveal group rounded-2xl overflow-hidden shadow-soft bg-white relative text-left">
+                            <img src="images/coffee.webp" alt="Hot espresso and cold coffee" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur text-white font-medium"> ☕ Study-break coffee fuel </span>
+                        </button>
+                        <button class="gallery-item reveal group rounded-2xl overflow-hidden shadow-soft bg-white relative text-left">
+                            <img src="images/sw.webp" alt="Club Sandwich Deluxe" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500" />
+                            <span class="absolute bottom-3 left-3 text-xs px-3 py-1 rounded-full bg-black/70 backdrop-blur text-white font-medium"> 🥪 Club sandwich delight </span>
+                        </button>
+                    </div>
+                    <!-- Lightbox -->
+                    <div id="lightbox" class="modal lightbox">
+                        <button id="lightboxClose" class="absolute top-4 right-4 text-3xl text-white/80 hover:text-white">×</button>
+                        <img id="lightboxImg" src="" alt="Expanded view" class="max-w-[90vw] max-h-[80vh] rounded-2xl shadow-card" />
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="border-t border-orange-100 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                <p>© 2025 Oven Express. Built for campus life.</p>
+                <p class="flex items-center gap-1">
+                    <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
+                    <span>Hot, fresh, and always on‑time.</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

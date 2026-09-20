@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Oven Express - Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: "#F39C12",
+              cream: "#FDF5E6",
+              brown: "#4A2C2A",
+            },
+          },
+          boxShadow: {
+            soft: "0 10px 25px rgba(0,0,0,0.08)",
+            card: "0 18px 45px rgba(0,0,0,0.12)",
+          },
+          borderRadius: {
+            "2xl": "1.25rem",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-white">
+  <div id="preloader"><div class="loader"></div></div>
+
+  <div class="min-h-screen flex flex-col bg-gradient-to-b from-brand-cream/80 to-white">
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-100">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 group">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-orange/10 text-brand-orange text-xl shadow-soft group-hover:scale-105 transition">🍕</span>
+          <div class="flex flex-col leading-tight">
+            <span class="font-semibold text-brand-brown tracking-tight text-lg">Oven Express</span>
+            <span class="text-xs text-slate-500">Hot, Fresh &amp; Fast</span>
+          </div>
+        </a>
+
+        <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+          <li><a href="index.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Home</a></li>
+          <li><a href="menu.html" class="nav-link-menu py-1 border-b-2 border-brand-orange text-brand-orange transition">Menu</a></li>
+          <li><a href="about.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">About</a></li>
+          <li><a href="gallery.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link py-1 border-b-2 border-transparent hover:border-brand-orange transition">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href="order.html" class="hidden sm:inline-flex items-center gap-2 bg-brand-orange text-white text-sm font-semibold px-4 py-2 rounded-full shadow-soft hover:shadow-card transition">
+            <span>Order Online</span>
+            <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+          </a>
+          <button id="mobileToggle" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-orange-100 text-brand-brown hover:bg-brand-cream transition">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+          </button>
+        </div>
+      </nav>
+
+      <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-300 bg-white/95 border-t border-orange-100">
+        <div class="max-w-6xl mx-auto px-4 pb-3 flex flex-col gap-1 text-sm font-medium text-slate-700">
+          <a href="index.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Home</a>
+          <a href="menu.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream text-brand-orange">Menu</a>
+          <a href="about.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">About</a>
+          <a href="gallery.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Gallery</a>
+          <a href="contact.html" class="text-left px-2 py-2 rounded-md hover:bg-brand-cream">Contact</a>
+          <a href="order.html" class="w-full flex items-center justify-center gap-2 mt-2 px-4 py-2 rounded-full bg-brand-orange text-white text-sm font-semibold shadow-soft">
+            <span>Order Online</span>
+            <span class="cart-count-badge hidden px-2 py-0.5 text-xs bg-white text-brand-brown rounded-full font-bold">0</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        <div class="text-center mb-10 reveal">
+          <h1 class="text-4xl font-bold text-brand-brown tracking-tight">Our Delicious Menu</h1>
+          <p class="text-slate-600 max-w-xl mx-auto mt-2">Hot, fresh, and perfect for your campus cravings. From quick bites to full meals.</p>
+        </div>
+
+        <!-- Search and Cart Jump -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 reveal">
+          <div class="relative flex-1 max-w-md">
+            <span class="absolute inset-y-0 left-3.5 flex items-center text-slate-400 text-sm">🔍</span>
+            <input type="text" id="menuSearch" placeholder="Search menu items (e.g. Pizza, Burger, Paneer)..." class="w-full pl-10 pr-4 py-2 text-sm rounded-full border border-orange-200 bg-white focus:outline-none focus:border-brand-orange shadow-soft" />
+          </div>
+          <a href="order.html" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-orange hover:text-brand-brown transition">
+            <span>View Cart &amp; Checkout</span>
+            <span class="text-lg">→</span>
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-8 reveal">
+          <button data-filter="all" class="menu-filter active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-brand-orange text-white shadow-soft">All</button>
+          <button data-filter="pizza" class="menu-filter px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-orange-50 text-brand-brown">Pizza</button>
+          <button data-filter="burgers" class="menu-filter px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-orange-50 text-brand-brown">Burgers</button>
+          <button data-filter="sandwiches" class="menu-filter px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-orange-50 text-brand-brown">Sandwiches</button>
+          <button data-filter="snacks" class="menu-filter px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-orange-50 text-brand-brown">Snacks</button>
+          <button data-filter="beverages" class="menu-filter px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-orange-50 text-brand-brown">Beverages</button>
+        </div>
+
+        <div id="noItemsMsg" class="hidden text-center py-12 rounded-2xl bg-white shadow-soft mb-8 border border-orange-100">
+          <p class="text-4xl mb-2">🔍</p>
+          <p class="text-base font-semibold text-brand-brown">No menu items match your search.</p>
+          <p class="text-xs text-slate-500 mt-1">Try searching for something else or switch the category filter.</p>
+        </div>
+
+        <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- Pizza Items -->
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="pizza" data-id="1" data-name="The Mega Veggie Pizza" data-price="120.50" data-img="images/pizza1.jpg">
+            <img src="images/pizza1.jpg" alt="Mega Veggie Pizza" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">The Mega Veggie Pizza</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 120.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Loaded with bell peppers, olives, corn, and spicy jalapeños. Campus favorite!</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="pizza" data-id="2" data-name="Classic Margherita" data-price="90.00" data-img="images/pizza2.jpg">
+            <img src="images/pizza2.jpg" alt="Classic Margherita" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Classic Margherita</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 90.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">A timeless classic with fresh mozzarella, basil, and a sweet tomato base.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="pizza" data-id="3" data-name="Paneer Tikka Pizza" data-price="130.50" data-img="images/pizza3.webp">
+            <img src="images/pizza3.webp" alt="Paneer Tikka Pizza" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Paneer Tikka Pizza</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 130.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Tangy marinated paneer pieces with a spicy, creamy sauce. Indian fusion delight.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="pizza" data-id="4" data-name="Double Cheese Burst" data-price="140.00" data-img="images/pizza4.webp">
+            <img src="images/pizza4.webp" alt="Double Cheese Burst" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Double Cheese Burst</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 140.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">The ultimate comfort food. Extra cheese both in the crust and on top!</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="pizza" data-id="5" data-name="Spicy Mushroom Pizza" data-price="110.50" data-img="images/pizza5.webp">
+            <img src="images/pizza5.webp" alt="Spicy Mushroom Pizza" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Spicy Mushroom Pizza</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 110.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Fresh mushrooms and chili flakes for that extra kick.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <!-- Burgers -->
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="burgers" data-id="6" data-name="Campus Veggie Burger" data-price="80.00" data-img="images/burger1.webp">
+            <img src="images/burger1.webp" alt="Campus Veggie Burger" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Campus Veggie Burger</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 80.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">A hearty vegetable patty, fresh lettuce, and our signature sauce on a soft bun.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="burgers" data-id="7" data-name="Spicy Aloo Tikki Burger" data-price="70.50" data-img="images/burger2.webp">
+            <img src="images/burger2.webp" alt="Spicy Aloo Tikki Burger" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Spicy Aloo Tikki Burger</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 70.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Crispy potato patty with mint mayo and onions. The perfect quick snack.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="burgers" data-id="8" data-name="Double Decker Paneer" data-price="110.50" data-img="images/burger3.webp">
+            <img src="images/burger3.webp" alt="Double Decker Paneer" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Double Decker Paneer</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 110.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Two thick paneer slices, cheese, and chipotle dressing.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="burgers" data-id="9" data-name="Crispy Potato-Cheese Melt" data-price="90.50" data-img="images/potatp.webp">
+            <img src="images/potatp.webp" alt="Crispy Potato-Cheese Melt" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Crispy Potato-Cheese Melt</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 90.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">A melt-in-your-mouth patty with potato, corn, and a cheesy center.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="burgers" data-id="10" data-name="Mexican Delight Burger" data-price="101.00" data-img="images/burger4.webp">
+            <img src="images/burger4.webp" alt="Mexican Delight Burger" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Mexican Delight Burger</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 101.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Patty infused with salsa, jalapeños, and a dash of fiery hot sauce.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <!-- Sandwiches -->
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="sandwiches" data-id="11" data-name="Grilled Cheese Sandwich" data-price="69.00" data-img="images/burger5.webp">
+            <img src="images/burger5.webp" alt="Grilled Cheese Sandwich" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Grilled Cheese Sandwich</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 69.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Buttery, crunchy toast with a molten cheese center. Classic comfort.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="sandwiches" data-id="12" data-name="Spicy Vegetable Sub" data-price="99.00" data-img="images/spicy1.webp">
+            <img src="images/spicy1.webp" alt="Spicy Vegetable Sub" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Spicy Vegetable Sub</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 99.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">A foot-long sub loaded with fresh veggies and a tangy, spicy dressing.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="sandwiches" data-id="13" data-name="Paneer Bhurji Sandwich" data-price="98.50" data-img="images/panner.webp">
+            <img src="images/panner.webp" alt="Paneer Bhurji Sandwich" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Paneer Bhurji Sandwich</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 98.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Spicy scrambled paneer filling, grilled to perfection.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="sandwiches" data-id="14" data-name="Corn & Capsicum Toast" data-price="70.00" data-img="images/corn.webp">
+            <img src="images/corn.webp" alt="Corn & Capsicum Toast" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Corn & Capsicum Toast</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 70.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Crunchy capsicum and sweet corn in a creamy, savory sauce.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="sandwiches" data-id="15" data-name="Club Sandwich Deluxe" data-price="100.00" data-img="images/sw.webp">
+            <img src="images/sw.webp" alt="Club Sandwich Deluxe" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Club Sandwich Deluxe</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 100.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Double-decker with coleslaw, cucumber, tomato, and mint chutney.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <!-- Snacks -->
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="snacks" data-id="16" data-name="Masala French Fries" data-price="75.50" data-img="images/fires.webp">
+            <img src="images/fires.webp" alt="Masala French Fries" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Masala French Fries</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 75.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Crispy golden fries tossed in our signature secret spice mix.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="snacks" data-id="17" data-name="Cheese Garlic Bread" data-price="110.00" data-img="images/bread.webp">
+            <img src="images/bread.webp" alt="Cheese Garlic Bread" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Cheese Garlic Bread</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 110.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Baked to a golden crisp with a generous layer of melted cheese and garlic butter.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="snacks" data-id="18" data-name="Veg Spring Rolls" data-price="60.50" data-img="images/roll.webp">
+            <img src="images/roll.webp" alt="Veg Spring Rolls" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Veg Spring Rolls</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 60.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Crunchy outside, flavorful mixed-veg filling. Served with sweet chili dip.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="snacks" data-id="19" data-name="Onion Rings" data-price="50.00" data-img="images/rings.webp">
+            <img src="images/rings.webp" alt="Onion Rings" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Onion Rings</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 50.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Deep-fried batter-coated onion rings. Great with a soft drink.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <!-- Beverages -->
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="beverages" data-id="20" data-name="Cold Coffee Blast" data-price="30.50" data-img="images/coffee.webp">
+            <img src="images/coffee.webp" alt="Cold Coffee Blast" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Cold Coffee Blast</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 30.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Rich, creamy, and iced to perfection. Perfect for a summer study session.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="beverages" data-id="21" data-name="Fresh Lime Soda" data-price="20.00" data-img="images/soda.webp">
+            <img src="images/soda.webp" alt="Fresh Lime Soda" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Fresh Lime Soda</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 20.00</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">A refreshing, tangy beverage to beat the campus heat.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="menu-card reveal rounded-2xl bg-white shadow-soft overflow-hidden flex flex-col" data-category="beverages" data-id="22" data-name="Hot Espresso" data-price="20.50" data-img="images/hot.webp">
+            <img src="images/hot.webp" alt="Hot Espresso" class="h-44 w-full object-cover hover:scale-105 transition-transform duration-500 rounded-t-2xl" />
+            <div class="p-4 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-brand-brown text-lg">Hot Espresso</h3>
+                <span class="text-brand-orange font-bold text-sm">₹ 20.50</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">Strong and smooth, brewed for all-night coding sessions.</p>
+              <button class="mt-auto inline-flex items-center justify-center w-full px-3 py-2 rounded-full bg-brand-orange text-white text-xs font-semibold hover:bg-brand-brown transition add-cart-btn">Add to Cart</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-orange-100 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p>© 2025 Oven Express. Built for campus life.</p>
+        <p class="flex items-center gap-1">
+          <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
+          Hot, fresh, and always on-time.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
